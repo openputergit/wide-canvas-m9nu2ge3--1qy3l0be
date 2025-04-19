@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LegalEase - Lawyer Management System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        .neomorphic {
+            border-radius: 20px;
+            background: #f0f0f0;
+            box-shadow: 20px 20px 60px #cccccc, -20px -20px 60px #ffffff;
+        }
+        .neomorphic-inset {
+            border-radius: 20px;
+            background: #f0f0f0;
+            box-shadow: inset 20px 20px 60px #cccccc, inset -20px -20px 60px #ffffff;
+        }
+        .neomorphic-button {
+            transition: all 0.3s ease;
+        }
+        .neomorphic-button:hover {
+            transform: scale(0.98);
+            box-shadow: inset 5px 5px 10px #cccccc, inset -5px -5px 10px #ffffff;
+        }
+        .loading {
+            border: 4px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 4px solid #0A1D37;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div id="app" class="flex min-h-screen">
+        <!-- Login Form -->
+        <div id="loginForm" class="w-full max-w-md mx-auto my-auto p-8 neomorphic">
+            <h1 class="text-3xl font-bold text-center text-[#0A1D37] mb-8">LegalEase</h1>
+            <form id="login" class="space-y-6">
+                <div class="space-y-2">
+                    <label class="block text-sm font-medium text-gray-700">Email</label>
+                    <input type="email" required class="w-full p-3 neomorphic-inset focus:outline-none">
+                </div>
+                <div class="space-y-2">
+                    <label class="block text-sm font-medium text-gray-700">Password</label>
+                    <input type="password" required class="w-full p-3 neomorphic-inset focus:outline-none">
+                </div>
+                <button type="submit" class="w-full py-3 bg-[#0A1D37] text-white rounded-lg neomorphic-button hover:bg-[#152a4d]">
+                    Login
+                </button>
+                <div class="text-center">
+                    <a href="#" class="text-sm text-[#0A1D37] hover:underline">Forgot Password?</a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Main Dashboard (Initially Hidden) -->
+        <div id="dashboard" class="hidden w-full">
+            <!-- Sidebar -->
+            <div class="fixed left-0 top-0 h-full w-64 bg-[#0A1D37] text-white p-4">
+                <div class="text-2xl font-bold mb-8">LegalEase</div>
+                <nav class="space-y-2">
+                    <a href="#" class="block p-3 rounded hover:bg-[#152a4d] transition-colors">
+                        <i class="bi bi-house-door mr-2"></i> Dashboard
+                    </a>
+                    <a href="#" class="block p-3 rounded hover:bg-[#152a4d] transition-colors">
+                        <i class="bi bi-people mr-2"></i> Clients
+                    </a>
+                    <a href="#" class="block p-3 rounded hover:bg-[#152a4d] transition-colors">
+                        <i class="bi bi-briefcase mr-2"></i> Cases
+                    </a>
+                    <a href="#" class="block p-3 rounded hover:bg-[#152a4d] transition-colors">
+                        <i class="bi bi-file-earmark-text mr-2"></i> Documents
+                    </a>
+                    <a href="#" class="block p-3 rounded hover:bg-[#152a4d] transition-colors">
+                        <i class="bi bi-currency-dollar mr-2"></i> Payments
+                    </a>
+                    <a href="#" class="block p-3 rounded hover:bg-[#152a4d] transition-colors">
+                        <i class="bi bi-gear mr-2"></i> Settings
+                    </a>
+                </nav>
+            </div>
+
+            <!-- Main Content -->
+            <div class="ml-64 p-8">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-2xl font-bold">Welcome, Advocate</h2>
+                    <div class="flex items-center space-x-4">
+                        <button class="relative">
+                            <i class="bi bi-bell text-xl"></i>
+                            <span class="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-4 h-4 text-xs flex items-center justify-center">3</span>
+                        </button>
+                        <div class="w-10 h-10 rounded-full bg-gray-300"></div>
+                    </div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="neomorphic p-6">
+                        <h3 class="text-gray-500 mb-2">Active Cases</h3>
+                        <p class="text-3xl font-bold">24</p>
+                    </div>
+                    <div class="neomorphic p-6">
+                        <h3 class="text-gray-500 mb-2">Upcoming Hearings</h3>
+                        <p class="text-3xl font-bold">7</p>
+                    </div>
+                    <div class="neomorphic p-6">
+                        <h3 class="text-gray-500 mb-2">Pending Tasks</h3>
+                        <p class="text-3xl font-bold">12</p>
+                    </div>
+                    <div class="neomorphic p-6">
+                        <h3 class="text-gray-500 mb-2">Outstanding Payments</h3>
+                        <p class="text-3xl font-bold">₹45,000</p>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="neomorphic p-6">
+                    <h3 class="text-xl font-bold mb-4">Recent Activity</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between p-3 neomorphic-inset">
+                            <div>
+                                <p class="font-medium">New Case Added</p>
+                                <p class="text-sm text-gray-500">State vs John Doe</p>
+                            </div>
+                            <span class="text-sm text-gray-500">2 hours ago</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 neomorphic-inset">
+                            <div>
+                                <p class="font-medium">Payment Received</p>
+                                <p class="text-sm text-gray-500">₹25,000 from Client #123</p>
+                            </div>
+                            <span class="text-sm text-gray-500">5 hours ago</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('login').addEventListener('submit', function(e) {
+            e.preventDefault();
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById('dashboard').classList.remove('hidden');
+        });
+    </script>
+<script>document.body.addEventListener('wheel', e => { if (!e.ctrlKey) return; e.preventDefault(); return }, { passive: false })</script>
+	</body>
+</html>
